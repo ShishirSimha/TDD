@@ -13,6 +13,7 @@ public class Calculator {
 		String[] numbers = splitNumbers(nums);
 		
 		//throw exception if 1 or more numbers are negative
+		throwNegativeNumbersIfAny(numbers);
 		
 		//compute answer
 		answer = computeAnswer(numbers);
@@ -28,7 +29,7 @@ public class Calculator {
 		// TODO Auto-generated method stub
 		int answer = 0;
 		for(String number : numbers) {
-			int num = Integer.parseInt(number);
+			int num = Integer.parseInt(number.trim());
 			answer += num;
 		}
 		return answer;
@@ -40,6 +41,20 @@ public class Calculator {
 	 * @return
 	 */
 	private static String[] splitNumbers(String nums) {
+		//for empty string return 0;
+		if(nums.isEmpty()) {
+			return new String[0];
+		}
+		//else split numbers using comma or \n
 		return nums.split(",|\n");
+	}
+	
+	/**
+	 * Method that throws exception on negative numbers
+	 * 
+	 * @param nums
+	 */
+	private static void throwNegativeNumbersIfAny(String[] nums) {
+		
 	}
 }
