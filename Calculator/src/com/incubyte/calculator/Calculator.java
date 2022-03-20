@@ -1,13 +1,17 @@
 package com.incubyte.calculator;
 
+import java.util.ArrayList;
+import java.util.StringJoiner;
+
 public class Calculator {
 	
 	/**
 	 * Method that adds up two or more numbers
 	 * @param nums
 	 * @return
+	 * @throws Exception 
 	 */
-	public static int add(String nums) {
+	public static int add(String nums) throws Exception {
 		int answer = 0;
 		//split the numbers
 		String[] numbers = splitNumbers(nums);
@@ -53,8 +57,18 @@ public class Calculator {
 	 * Method that throws exception on negative numbers
 	 * 
 	 * @param nums
+	 * @throws Exception
 	 */
-	private static void throwNegativeNumbersIfAny(String[] nums) {
-		
+	private static void throwNegativeNumbersIfAny(String[] nums) throws Exception {
+		ArrayList<String> negative = new ArrayList<String>();
+		int size = nums.length;
+		for(int i=0; i<size; i++) {
+			if(Integer.parseInt(nums[i].trim())<0) {
+				negative.add(nums[i]);
+			}
+		}
+		if(negative.size()>0) {
+			throw new Exception("negatives not allowed: " + String.join(", ",negative));
+		}
 	}
 }

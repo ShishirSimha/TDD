@@ -19,7 +19,12 @@ public class CalculatorTest {
 	 */
 	@Test
 	public void testAddTwoNumbers() {
-		assertEquals(3, Calculator.add("1,2"));
+		try {
+			assertEquals(3, Calculator.add("1,2"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -27,7 +32,12 @@ public class CalculatorTest {
 	 */
 	@Test
 	public void testEmptyString() {
-		assertEquals(0, Calculator.add(""));
+		try {
+			assertEquals(0, Calculator.add(""));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -35,7 +45,12 @@ public class CalculatorTest {
 	 */
 	@Test
 	public void testSingleNumber() {
-		assertEquals(123, Calculator.add("123"));
+		try {
+			assertEquals(123, Calculator.add("123"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -43,7 +58,33 @@ public class CalculatorTest {
 	 */
 	@Test
 	public void testAddFourNumbers() {
-		assertEquals(14, Calculator.add("1,2\n3, 8"));
+		try {
+			assertEquals(14, Calculator.add("1,2\n3, 8"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void shouldThrowExceptionForNegativeNumbers() {
+		try{
+				Calculator.add("1,-2,3");
+				fail("Exception expected");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	//	TODO: Exception message should have negative number
+	@Test
+	public void shouldHaveNegativeNumbersInException() throws Exception {
+		try{
+			Calculator.add("-1,-2,3");
+			fail("Exception expected");
+		}catch(Exception e) {
+			assertEquals("negatives not allowed: -1, -2",e.getMessage());
+		}
 	}
 	
 }
